@@ -1,14 +1,11 @@
 package AllureTest;
 
-import AllureTest.WebSteps;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.*;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -20,10 +17,10 @@ public class AllureReportsTest {
     private static final String SEARCH = "allure";
     private static final String REPOSITORY = "allure-framework/allure2";
     private static final int ISSUE_NUMBER = 1294;
+    private WebSteps steps = new WebSteps();
 
-    //Лямбда шаги
+
     @Test
-    //дополнительная информация для Allure отчета
     @Feature("Issues")
     @Owner("Ivan")
     @Story("Создание Issues")
@@ -54,12 +51,9 @@ public class AllureReportsTest {
         });
     }
 
-    //Selenide тест
+
     @Test
     public void testSelenideIssue() {
-        //создание лога
-        SelenideLogger.addListener("allure", new AllureSelenide().screenshots(false));
-
         open(BASE_URL);
         $(".header-search-input").setValue(SEARCH).submit();
         $(By.linkText("allure-framework/allure2")).click();
@@ -67,10 +61,6 @@ public class AllureReportsTest {
         $(withText("#" + ISSUE_NUMBER)).should(Condition.visible);
 
     }
-
-
-    //Шаги с аннотацией @Step
-    private WebSteps steps = new WebSteps();
 
     @Test
     public void testAnnotatedStepsIssue() {
