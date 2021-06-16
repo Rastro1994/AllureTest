@@ -19,7 +19,7 @@ public class AllureReportsTest {
     private static final int ISSUE_NUMBER = 1294;
     private WebSteps steps = new WebSteps();
 
-
+    //Тест с использованием Step'ов
     @Test
     @Feature("Issues")
     @Owner("Ivan")
@@ -51,7 +51,7 @@ public class AllureReportsTest {
         });
     }
 
-
+    //Тест на чистом Селениде
     @Test
     public void testSelenideIssue() {
         open(BASE_URL);
@@ -61,7 +61,8 @@ public class AllureReportsTest {
         $(withText("#" + ISSUE_NUMBER)).should(Condition.visible);
 
     }
-
+    
+    //Тест с аннотацией
     @Test
     public void testAnnotatedStepsIssue() {
         steps.openThePage();
